@@ -36,11 +36,11 @@ def get_summary(t,tokenizer_summary,model_summary):
 
 
 @app.get('/')
-def home():
+async def home():
     return {"message": "Hello World"}
 
 @app.post("/summary")
-def getsummary(user_request_in: SummaryRequest):
+async def getsummary(user_request_in: SummaryRequest):
     payload = {"text":user_request_in.text,"min_length":user_request_in.min_length,"max_length":user_request_in.max_length}
     summ = get_summary(payload,tokenizer,model)
     summ["Device"]= torch_device
